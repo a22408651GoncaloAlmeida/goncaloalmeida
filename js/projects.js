@@ -1,5 +1,5 @@
 /* Project data. To add a project, copy one block and edit it:
- * the filters, the counts and the skills list all update by themselves.
+ * the filters update by themselves.
  *
  *   context : 'university' or 'personal'
  *   team    : true when it was built with classmates
@@ -63,7 +63,7 @@ window.PROJECTS = [
         title: 'Susana Cardoso',
         context: 'personal',
         year: 2026,
-        tech: ['TypeScript', 'React', 'TanStack', 'Tailwind CSS', 'Vercel Blob'],
+        tech: ['TypeScript', 'React', 'Tailwind CSS', 'Vercel Blob'],
         summary: 'The site of a pyrography artist, in Portuguese and English, with a gallery, a commissions page and a private panel where she manages the catalogue. Started in Lovable, then rebuilt: new design, storage moved to Vercel Blob and a new admin panel.',
         image: 'images/portfolio/susana-cardoso.jpg',
         live: 'https://susanacardoso.vercel.app'
@@ -110,37 +110,16 @@ window.PROJECTS = [
         context: 'university',
         team: true,
         year: 2025,
-        tech: ['C', 'POSIX threads', 'CMake'],
-        summary: 'A simulator with round-robin scheduling on several CPU threads and virtual memory with paging and swap. Pages are replaced by FIFO, random, clock or LRU. Extends a base supplied by the course.',
-        file: 'threads',
+        tech: ['C'],
+        summary: 'A simulator that shares the processor between programs with round-robin scheduling and manages virtual memory with paging and swap. Pages are replaced by FIFO, random, clock or LRU. Extends a base supplied by the course.',
+        file: 'algorithms',
         code: [
-            'ossim --cpus N --algo LRU',
-            '├─ command_worker',
-            '├─ blocked_worker',
-            '├─ clock_worker',
-            '└─ cpu_worker × N',
-            '   ├─ scheduler',
-            '   └─ virtual memory'
+            'page replacement',
+            '├─ FIFO',
+            '├─ RANDOM',
+            '├─ CLOCK',
+            '└─ LRU'
         ]
-    },
-    {
-        title: 'Sneaker collection manager',
-        context: 'university',
-        team: true,
-        year: 2025,
-        tech: ['Java', 'Swing'],
-        summary: 'A desktop app to organise sneakers by decade, with search, sorting and saved collections. An analysis service writes prompts about each pair for a language model, and runs on a mock model by default.',
-        file: 'ColecaoInterface.java',
-        code: [
-            'public ColecaoInterface() {',
-            '    setContentPane(criarRoot());',
-            '',
-            '    service.carregarTodas();',
-            '    atualizarComboColecoes();',
-            '    carregarTabela();',
-            '}'
-        ],
-        repo: 'https://github.com/miguel-baptista07/Grupo6_MiguelGoncalo_Colecao'
     },
     {
         title: 'DEISI Shop',

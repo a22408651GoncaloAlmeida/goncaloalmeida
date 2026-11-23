@@ -88,7 +88,18 @@
     const CONTEXTS = [['all', 'All'], ['university', 'University'], ['personal', 'Personal']];
     const tally = {};
     projects.forEach(p => p.tech.forEach(t => { tally[t] = (tally[t] || 0) + 1; }));
-    const allTech = Object.keys(tally).sort((a, b) => tally[b] - tally[a] || a.localeCompare(b));
+
+    // edit here to change the skills section; the filter buttons follow the same order
+    const SKILLS = {
+        'strongest': ['Java', 'SQL'],
+        'backend': ['Spring Boot', 'Javalin', 'REST API', 'Kafka', 'gRPC', 'JUnit', 'Maven', 'Python', 'Django', 'C'],
+        'databases': ['PostgreSQL', 'SQL Server'],
+        'tools': ['Docker', 'Node.js', 'GitHub Actions', 'Vercel Blob', 'UML', 'Excel'],
+        'frontend': ['JavaScript', 'TypeScript', 'React', 'Next.js', 'HTML', 'CSS', 'Tailwind CSS']
+    };
+    const order = Object.values(SKILLS).flat();
+    const rank = t => (order.includes(t) ? order.indexOf(t) : order.length);
+    const allTech = Object.keys(tally).sort((a, b) => rank(a) - rank(b) || a.localeCompare(b));
     const state = { context: 'all', tech: new Set(), match: 'any', search: '' };
 
     const fold = s => s.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '');
@@ -158,7 +169,7 @@
     CONTEXTS.forEach(([id, label]) => $('#context-filter').append(
         el('button', { class: 'chip', type: 'button', 'data-context': id }, label)));
     allTech.forEach(t => $('#tech-filter').append(
-        el('button', { class: 'chip', type: 'button', 'data-chip': t }, t, el('span', { class: 'chip__n' }))));
+        el('button', { class: 'chip', type: 'button', 'data-chip': t }, t)));
 
     // the filters written as a PostgreSQL query (tech is a text[] column)
     function renderSql(n) {
@@ -197,14 +208,13 @@
         $$('[data-match]').forEach(b => b.setAttribute('aria-pressed', b.dataset.match === state.match));
         $('#match-row').hidden = state.tech.size < 2;
 
-        // each count says how many projects that technology would give
+        // dim a technology when picking it would leave no project
         $$('[data-chip]').forEach(b => {
             const t = b.dataset.chip;
             const probe = state.match === 'all' ? new Set([...state.tech, t]) : new Set([t]);
             const c = projects.filter(p => passes(p, probe)).length;
             b.setAttribute('aria-pressed', state.tech.has(t));
             b.dataset.empty = c === 0;
-            $('.chip__n', b).textContent = c;
         });
         $$('[data-tech]').forEach(b => b.classList.toggle('is-on', state.tech.has(b.dataset.tech)));
 
@@ -247,30 +257,21 @@
     });
 
 
-    /* Skills, counted from the projects
+    /* Skills, in order of how well I know them
      * ------------------------------------------------------ */
-    const GROUPS = {
-        languages: ['Java', 'Python', 'C', 'JavaScript', 'TypeScript', 'SQL', 'HTML', 'CSS'],
-        frameworks: ['Spring Boot', 'Django', 'React', 'Next.js', 'TanStack', 'Tailwind CSS', 'Swing', 'JUnit'],
-        'data and messaging': ['PostgreSQL', 'Kafka', 'gRPC', 'REST API', 'Vercel Blob'],
-        tools: ['Docker', 'Maven', 'GitHub Actions', 'CMake', 'UML', 'POSIX threads']
-    };
-    const known = Object.values(GROUPS).flat();
-    GROUPS.other = allTech.filter(t => !known.includes(t));
-    Object.entries(GROUPS).forEach(([dir, list]) => {
-        const items = list.filter(t => tally[t]).sort((a, b) => tally[b] - tally[a]);
-        if (!items.length) return;
-        const ul = el('ul');
-        items.forEach(t => {
-            const bar = el('span', { class: 'tree__bar', 'aria-hidden': 'true' });
-            for (let i = 0; i < tally[t]; i++) bar.append(el('i'));
-            const b = el('button', { type: 'button' },
-                el('span', { class: 'tree__name' }, t), bar,
-                el('span', { class: 'tree__n' }, tally[t] + (tally[t] === 1 ? ' project' : ' projects')));
-            b.addEventListener('click', () => { reset(); state.tech.add(t); render(); goTo($('.query')); });
-            ul.append(el('li', {}, b));
+    Object.entries(SKILLS).forEach(([dir, list], i) => {
+        const ul = el('ul', { class: i === 0 ? 'tree__core' : undefined });
+        list.forEach(t => {
+            let node;
+            if (tally[t]) {
+                node = el('button', { type: 'button', 'aria-label': 'See projects that use ' + t }, t);
+                node.addEventListener('click', () => { reset(); state.tech.add(t); render(); goTo($('.query')); });
+            } else {
+                node = el('span', {}, t);
+            }
+            ul.append(el('li', {}, node));
         });
-        $('#skill-tree').append(el('p', { class: 'tree__dir' }, dir + '/'), ul);
+        $('#skill-tree').append(el('div', {}, el('p', { class: 'tree__dir' }, dir + '/'), ul));
     });
 
 
@@ -319,7 +320,7 @@
             },
             whoami() { print('Gonçalo Almeida. Computer Engineering student at Lusófona, Deloitte ambassador, regular at the tennis and padel courts.'); },
             deloitte() {
-                print('Summer intern in 2026, Team-Players award with Infini9, ambassador today.');
+                print('Summer intern in Strategy, Risk & Technology in 2026: a rule engine in Java and a lot of SQL. Team-Players award with Infini9, ambassador today.');
                 jump('deloitte');
             },
             projects(arg) {

@@ -195,6 +195,12 @@ h3 { font: 600 1.15rem/1.4 var(--sans); }
 .deloitte__intro { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); gap: 8px clamp(32px, 6vw, 96px); align-items: end; margin-bottom: 48px; }
 .deloitte__intro h2, .deloitte__intro p { margin: 0; }
 
+.work { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; margin-bottom: 16px; }
+.work > div { display: flex; flex-direction: column; padding: 26px 28px; border: 1px solid var(--line); background: var(--panel); }
+.work h3 { margin-bottom: 10px; }
+.work p { margin-bottom: 16px; }
+.work .work__tech { margin: auto 0 0; color: var(--sky); font: 400 .8125rem/1.6 var(--mono); }
+
 .gallery { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 16px; }
 .shot { display: flex; flex-direction: column; padding: 0; border: 1px solid var(--line); background: var(--panel); text-align: left; cursor: zoom-in; transition: border-color .15s; }
 .shot:hover { border-color: var(--blue); }
@@ -235,7 +241,6 @@ h3 { font: 600 1.15rem/1.4 var(--sans); }
 .chip:hover { border-color: var(--sky); color: var(--white); }
 .chip[aria-pressed="true"] { border-color: var(--blue); background: var(--blue); color: #fff; }
 .chip[data-empty="true"]:not([aria-pressed="true"]) { opacity: .45; }
-.chip__n { margin-left: 8px; opacity: .75; }
 
 .query__sql { margin: 0; padding: 18px 24px; border-top: 1px solid var(--line); background: #000; color: var(--white); font: 400 .875rem/1.8 var(--mono); white-space: pre-wrap; overflow-wrap: anywhere; min-height: 8.6em; }
 .kw { color: var(--sky); } .str { color: #fff; background: rgba(102, 102, 255, .28); } .com { color: var(--dim); }
@@ -265,18 +270,18 @@ h3 { font: 600 1.15rem/1.4 var(--sans); }
 /* ---------- skills ---------- */
 .skills { display: grid; grid-template-columns: minmax(0, 6fr) minmax(0, 5fr); gap: 64px clamp(32px, 6vw, 96px); }
 .skills__second { margin-top: 1.2em; }
-.tree { font: 400 .9rem/1 var(--mono); }
-.tree__dir { margin: 22px 0 4px; color: var(--white); }
+.tree { columns: 2; column-gap: 32px; font: 400 .9rem/1 var(--mono); }
+.tree > div { break-inside: avoid; padding-bottom: 22px; }
+.tree__dir { margin: 0 0 4px; color: var(--white); }
 .tree ul { list-style: none; margin: 0; padding: 0 0 0 7px; }
 .tree li { position: relative; padding-left: 26px; }
 .tree li::before { content: ""; position: absolute; left: 0; top: 0; width: 16px; height: 50%; border: solid #454a58; border-width: 0 0 1px 1px; }
 .tree li:not(:last-child)::after { content: ""; position: absolute; left: 0; top: 0; bottom: 0; border-left: 1px solid #454a58; }
-.tree button { display: flex; gap: 14px; align-items: center; width: 100%; padding: 7px 0; border: 0; background: none; color: var(--text); font: inherit; text-align: left; cursor: pointer; }
-.tree button:hover { color: var(--white); }
-.tree__name { flex: 0 0 8.5em; }
-.tree__bar { flex: 1; display: flex; gap: 3px; }
-.tree__bar i { width: 16px; height: 8px; background: var(--blue); }
-.tree__n { color: var(--text); }
+.tree li { display: flex; flex-wrap: wrap; align-items: center; gap: 2px 18px; min-height: 32px; line-height: 1.4; }
+.tree li::before { height: 16px; }
+.tree button { padding: 5px 0; border: 0; background: none; color: var(--text); font: inherit; text-align: left; text-decoration: underline; text-decoration-color: #555a67; text-underline-offset: 5px; cursor: pointer; }
+.tree button:hover { color: var(--white); text-decoration-color: var(--blue); }
+.tree__core button, .tree__core span { color: var(--white); font-size: 1.125rem; }
 
 
 /* ---------- contact ---------- */
@@ -317,7 +322,7 @@ h3 { font: 600 1.15rem/1.4 var(--sans); }
     .tabs a { padding: 18px 24px; border: 0; border-top: 1px solid var(--line); }
     .tabs a.is-current::before { inset: 0 auto 0 0; width: 2px; height: auto; }
     .brand { padding-left: 24px; }
-    .about, .deloitte__intro, .skills, .contact { grid-template-columns: minmax(0, 1fr); }
+    .about, .deloitte__intro, .work, .skills, .contact { grid-template-columns: minmax(0, 1fr); }
     .about__pic { max-width: 440px; margin: 0 10px 28px; }
     .deloitte__intro { gap: 20px; }
 }
@@ -336,9 +341,6 @@ h3 { font: 600 1.15rem/1.4 var(--sans); }
     .filter { grid-template-columns: minmax(0, 1fr); }
     .query__filters, .query__sql, .query__status { padding-inline: 16px; }
     .statusbar__opt { display: none; }
-    .tree__name { flex-basis: 7.4em; }
-    .tree button { gap: 8px; }
-    .tree__bar i { width: 9px; }
     .shell { height: 380px; font-size: .8125rem; }
     .shell__out, .shell__line { padding-inline: 14px; }
     .shell__help { grid-template-columns: 9.5em 1fr; }
