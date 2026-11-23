@@ -1,439 +1,295 @@
 <!DOCTYPE html>
-<html class="no-js ss-preload" lang="en">
+<html lang="en">
 <head>
-
-    <!--- basic page needs
-    ================================================== -->
     <meta charset="utf-8">
     <title>Gonçalo Almeida</title>
-    <meta name="description" content="">
-    <meta name="author" content="">
-
-    <!-- mobile specific metas
-    ================================================== -->
+    <meta name="description" content="Gonçalo Almeida, Computer Engineering student at Universidade Lusófona and Deloitte ambassador. Projects, experience and contacts.">
+    <meta name="author" content="Gonçalo Almeida">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#08090c">
 
-    <!-- CSS
-    ================================================== -->
-    <link rel="stylesheet" href="css/vendor.css">
-    <link rel="stylesheet" href="css/styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=JetBrains+Mono:wght@400;500&family=Public+Sans:wght@300;400;500;600&display=swap">
+    <link rel="stylesheet" href="css/site.css">
 
-    <!-- favicons
-    ================================================== -->
     <link rel="apple-touch-icon" sizes="180x180" href="myicon%20180x180.png">
     <link rel="icon" type="image/png" sizes="32x32" href="myicon%2032x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="myicon%2012x12.png">
     <link rel="manifest" href="site.webmanifest">
-
 </head>
 
 <body id="top">
 
+<a class="skip-link" href="#about">Skip to content</a>
 
-    <!-- # preloader
-    ================================================== -->
-    <div id="preloader">
-        <div id="loader">
+<header class="site-header">
+    <a class="brand" href="#top">Gonçalo Almeida</a>
+    <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="tabs">Menu</button>
+    <nav class="tabs" id="tabs" aria-label="Main">
+        <a href="#about">About</a>
+        <a href="#experience">Experience</a>
+        <a href="#deloitte">Deloitte</a>
+        <a href="#projects">Projects</a>
+        <a href="#skills">Skills</a>
+        <a href="#contact">Contact</a>
+    </nav>
+</header>
+
+<main>
+
+    <!-- intro -->
+    <section class="intro" id="intro">
+        <div class="circles" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span></div>
+
+        <div class="wrap intro__grid">
+            <div class="intro__text">
+                <h1>I'm Gonçalo Almeida, Computer Engineering student at Lusófona and Deloitte ambassador.</h1>
+                <p class="intro__links">
+                    <a class="btn" href="#projects">See my projects</a>
+                    <a class="textlink" href="https://github.com/a22408651GoncaloAlmeida" target="_blank" rel="noopener">GitHub</a>
+                    <a class="textlink" href="https://www.linkedin.com/in/gonçalo-almeida-049737350" target="_blank" rel="noopener">LinkedIn</a>
+                    <a class="textlink" href="https://www.instagram.com/goncaloo.almeidaaa/" target="_blank" rel="noopener">Instagram</a>
+                </p>
+            </div>
+
+            <!-- filled by js/site.js: the real UTF-8 bytes of the text in data-text -->
+            <figure class="hexdump" data-text="Gonçalo Almeida. Computer Engineering, Universidade Lusófona. Deloitte summer intern 2026, now ambassador. Python, SQL, TypeScript, C.">
+                <div class="hexdump__head"><span>$ hexdump -C goncalo.txt</span></div>
+                <div class="hexdump__body" aria-hidden="true"></div>
+                <figcaption class="hexdump__foot">Point at any byte to read it</figcaption>
+            </figure>
         </div>
+    </section>
+
+
+    <!-- about -->
+    <section class="section" id="about">
+        <div class="wrap about">
+            <figure class="about__pic">
+                <img src="images/about.jpg" width="900" height="985" alt="Portrait of Gonçalo Almeida">
+            </figure>
+
+            <div class="about__text">
+                <h2>About</h2>
+                <p>I'm a Computer Engineering student on a mission to understand how computers work, and to figure out why the thing that worked yesterday suddenly doesn't work today. It's a thrilling (and slightly chaotic) journey through code, circuits and the occasional stack overflow spiral.</p>
+                <p>When I'm not deep in code, I like to balance things out by being as active as possible. I've always loved sports, and recently I've been playing a lot of tennis and padel. Whether it's on a court or out for a run, I enjoy anything that gets me moving and gives my brain a break from staring at screens.</p>
+                <p>Right now I'm focused on learning as much as I can, both technically and personally. Growth comes from staying curious, stepping outside my comfort zone and being open to new experiences, whether that's in the classroom, at work or on the court.</p>
+                <p><a class="btn" href="Curriculo%20-%20Gonçalo%20Almeida.pdf">Download résumé (PDF)</a></p>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- experience + education, drawn as a git graph -->
+    <section class="section" id="experience">
+        <div class="wrap">
+            <h2>Experience and education</h2>
+            <p class="lead">Two branches of the same history, newest first.</p>
+
+            <ul class="legend" aria-label="Branches">
+                <li class="legend__item legend__item--study">education</li>
+                <li class="legend__item legend__item--work">experience</li>
+            </ul>
+
+            <ol class="graph">
+                <li class="commit commit--work commit--first">
+                    <p class="commit__date">2026 to present</p>
+                    <div>
+                        <h3>Deloitte ambassador <span class="ref">HEAD</span></h3>
+                        <p>After the summer internship I became a Deloitte ambassador, a role I hold today.</p>
+                    </div>
+                </li>
+                <li class="commit commit--work">
+                    <p class="commit__date">Summer 2026</p>
+                    <div>
+                        <h3>Deloitte summer intern</h3>
+                        <p>I joined U@Deloitte, the firm's summer programme, where I worked on team challenges and won the Team-Players award with my team, Infini9. <a class="textlink" href="#deloitte">See the photos</a></p>
+                    </div>
+                </li>
+                <li class="commit commit--work">
+                    <p class="commit__date">2025</p>
+                    <div>
+                        <h3>Zara</h3>
+                        <p>Warehouse work: preparing and organising merchandise for store replenishment, locating items for customer requests and taking part in inventory control. I developed strong organisation and attention to detail.</p>
+                    </div>
+                </li>
+                <li class="commit commit--work commit--branch">
+                    <p class="commit__date">2025</p>
+                    <div>
+                        <h3>Lefties</h3>
+                        <p>My first professional experience. I took on different roles across the store and built customer service, teamwork, leadership and adaptability.</p>
+                    </div>
+                </li>
+                <li class="commit commit--study">
+                    <p class="commit__date">September 2024 to present</p>
+                    <div>
+                        <h3>Universidade Lusófona</h3>
+                        <p>Degree in Computer Engineering. It's where I've built a solid foundation, explored different areas of tech and strengthened my taste for problem-solving.</p>
+                    </div>
+                </li>
+                <li class="commit commit--study commit--last">
+                    <p class="commit__date">2017 to 2024</p>
+                    <div>
+                        <h3>Escola Frei Gonçalo de Azevedo</h3>
+                        <p>Science and Technology. A mix of challenges and growth where I learned a lot about responsibility and time management, sometimes the hard way.</p>
+                    </div>
+                </li>
+            </ol>
+        </div>
+    </section>
+
+
+    <!-- deloitte -->
+    <section class="section deloitte" id="deloitte">
+        <div class="wrap">
+            <div class="deloitte__intro">
+                <h2>From summer intern to ambassador at Deloitte</h2>
+                <p class="lead">In the summer of 2026 I took part in U@Deloitte. There were talks, group challenges and a day cleaning up a beach. I left with the Team-Players award, shared with the Infini9 team, and came back as an ambassador.</p>
+            </div>
+
+            <div class="gallery">
+                <button class="shot shot--wide" type="button" data-full="images/deloitte/u-at-deloitte-group-1800.jpg">
+                    <img src="images/deloitte/u-at-deloitte-group-900.jpg" srcset="images/deloitte/u-at-deloitte-group-900.jpg 900w, images/deloitte/u-at-deloitte-group-1800.jpg 1800w" sizes="(max-width: 1240px) 100vw, 1200px" width="1800" height="774" loading="lazy" alt="All the U@Deloitte interns together in an auditorium after the closing session">
+                    <span class="shot__cap"><b>u-at-deloitte.jpg</b> The whole programme at the closing session</span>
+                </button>
+                <button class="shot shot--award" type="button" data-full="images/deloitte/team-players-award.jpg">
+                    <img src="images/deloitte/team-players-award.jpg" width="1200" height="800" loading="lazy" alt="The Infini9 team holding their Team-Players certificates in front of a projected slide">
+                    <span class="shot__cap"><b>team-players.jpg</b> Infini9 receiving the Team-Players award</span>
+                </button>
+                <button class="shot shot--tall" type="button" data-full="images/deloitte/audience-applause.jpg">
+                    <img src="images/deloitte/audience-applause.jpg" width="1000" height="1050" loading="lazy" alt="Interns in suits applauding during a session">
+                    <span class="shot__cap"><b>applause.jpg</b> During one of the sessions</span>
+                </button>
+                <button class="shot shot--tall" type="button" data-full="images/deloitte/audience-session.jpg">
+                    <img src="images/deloitte/audience-session.jpg" width="1000" height="1050" loading="lazy" alt="A row of interns in suits listening to a talk">
+                    <span class="shot__cap"><b>session.jpg</b> Listening to a talk</span>
+                </button>
+                <button class="shot shot--beach" type="button" data-full="images/deloitte/beach-cleanup-1800.jpg">
+                    <img src="images/deloitte/beach-cleanup-900.jpg" srcset="images/deloitte/beach-cleanup-900.jpg 900w, images/deloitte/beach-cleanup-1800.jpg 1800w" sizes="(max-width: 800px) 100vw, 700px" width="1800" height="855" loading="lazy" alt="Interns waving behind a pile of blue bags filled during a beach clean-up">
+                    <span class="shot__cap"><b>beach-cleanup.jpg</b> The result of our beach clean-up</span>
+                </button>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- projects -->
+    <section class="section" id="projects">
+        <div class="wrap">
+            <h2>Projects</h2>
+            <p class="lead">University and personal work. Pick the technologies you care about and the query below changes with you.</p>
+
+            <div class="query">
+                <div class="query__filters">
+                    <div class="filter" role="group" aria-label="Filter by context">
+                        <span class="filter__label">Context</span>
+                        <div class="filter__opts" id="context-filter"></div>
+                    </div>
+                    <div class="filter" role="group" aria-label="Filter by technology">
+                        <span class="filter__label">Technology</span>
+                        <div class="filter__opts" id="tech-filter"></div>
+                    </div>
+                    <div class="filter">
+                        <label class="filter__label" for="search">Search</label>
+                        <input id="search" type="search" placeholder="shop, radar, API" autocomplete="off">
+                    </div>
+                    <div class="filter" id="match-row" role="group" aria-label="How to combine technologies" hidden>
+                        <span class="filter__label">Match</span>
+                        <div class="filter__opts">
+                            <button class="chip" type="button" data-match="any" aria-pressed="true">Any of them</button>
+                            <button class="chip" type="button" data-match="all" aria-pressed="false">All of them</button>
+                        </div>
+                    </div>
+                </div>
+                <pre class="query__sql" aria-hidden="true"><code id="sql"></code></pre>
+                <div class="query__status">
+                    <span id="count" role="status" aria-live="polite"></span>
+                    <button class="textlink" id="reset" type="button" hidden>Clear filters</button>
+                </div>
+            </div>
+
+            <ul class="cards" id="cards"></ul>
+            <noscript><p>The project list needs JavaScript. You can also see everything on <a class="textlink" href="https://github.com/a22408651GoncaloAlmeida">GitHub</a>.</p></noscript>
+        </div>
+    </section>
+
+
+    <!-- skills -->
+    <section class="section" id="skills">
+        <div class="wrap skills">
+            <div>
+                <h2>Technical skills</h2>
+                <p class="lead">Counted from the projects above. Choose one to see where I used it.</p>
+                <div id="skill-tree" class="tree"></div>
+            </div>
+            <div>
+                <h2>Personal skills</h2>
+                <ul class="plainlist">
+                    <li>Teamwork</li>
+                    <li>Responsibility</li>
+                    <li>Adaptability</li>
+                    <li>Quick learner</li>
+                    <li>Problem-solving</li>
+                    <li>Attention to detail</li>
+                </ul>
+                <h2 class="skills__second">Passions</h2>
+                <p><strong>Technology.</strong> From playing with computers as a kid and building simple programs to exploring the latest innovations.</p>
+                <p><strong>Sports.</strong> The teamwork, strategy and friendly competition keep things exciting and keep me focused.</p>
+                <p><strong>Self-development.</strong> Reading, taking courses and setting new challenges, on both the personal and professional side.</p>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- contact -->
+    <section class="section" id="contact">
+        <div class="wrap contact">
+            <div>
+                <h2>Looking forward to hearing from you</h2>
+                <p><a class="btn" href="mailto:goncalmeida06@gmail.com">Send me an email</a></p>
+                <ul class="plainlist">
+                    <li><a class="textlink" href="https://github.com/a22408651GoncaloAlmeida" target="_blank" rel="noopener">GitHub</a></li>
+                    <li><a class="textlink" href="https://www.linkedin.com/in/gonçalo-almeida-049737350" target="_blank" rel="noopener">LinkedIn</a></li>
+                    <li><a class="textlink" href="https://www.instagram.com/goncaloo.almeidaaa/" target="_blank" rel="noopener">Instagram</a></li>
+                </ul>
+            </div>
+
+            <div class="shell" id="shell">
+                <div class="shell__out" id="shell-out" role="log" aria-live="polite" tabindex="0" aria-label="Shell output"></div>
+                <form class="shell__line" id="shell-form">
+                    <label for="shell-in">visitor@goncalo:~$</label>
+                    <input id="shell-in" type="text" autocomplete="off" autocapitalize="off" spellcheck="false" enterkeyhint="go" placeholder="type help">
+                </form>
+            </div>
+        </div>
+    </section>
+
+</main>
+
+<footer class="footer">
+    <div class="wrap">
+        <p>© 2026 Gonçalo Almeida. Originally based on a design by <a class="textlink" href="https://www.styleshout.com/">StyleShout</a>.</p>
+        <p><a class="textlink" href="#top">Back to top</a></p>
     </div>
-
-
-    <!-- # page wrap
-    ================================================== -->
-    <div class="s-pagewrap">
-
-        <div class="circles">
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
-        </div>
-
-
-        <!-- ## site header 
-        ================================================== -->
-        <header class="s-header">
-
-            <div class="header-mobile">
-                <span class="mobile-home-link"><a href="index.html">Gonçalo Almeida</a></span>
-                <a class="mobile-menu-toggle" href="#0"><span>Menu</span></a>
-            </div>
-
-            <div class="row wide main-nav-wrap">
-                <nav class="column lg-12 main-nav">
-                    <ul>
-                        <li><a href="index.html" class="home-link">Gonçalo Almeida</a></li>
-                        <li class="current"><a href="#intro" class="smoothscroll">Intro</a></li>
-                        <li><a href="#about" class="smoothscroll">About</a></li>
-                        <li><a href="#experience" class="smoothscroll">Experience</a></li>
-                        <li><a href="#works" class="smoothscroll">Projects</a></li>
-                        <li><a href="#skills" class="smoothscroll">Skills</a></li>
-                        <li><a href="#contact" class="smoothscroll">Contacts</a></li>
-                    </ul>
-                </nav>
-            </div>
-
-        </header> <!-- end s-header -->
-
-
-        <!-- ## main content
-        ==================================================- -->
-        <main class="s-content">
-
-
-            <!-- ### intro
-            ================================================== -->
-            <section id="intro" class="s-intro target-section">
-
-                <div class="row intro-content wide">
-
-                    <div class="column">
-                        <div class="text-pretitle with-line">
-                            Hi guys
-                        </div>
-
-                        <h1 class="text-huge-title">
-                            I'm Gonçalo Almeida, <br>
-                            current stundent <br>
-                            of Computer Engeneering <br>
-                            at Lusófona.
-                        </h1>
-                    </div>
-
-                    <ul class="intro-social">
-                        <li><a href="https://www.linkedin.com/in/gonçalo-almeida-049737350" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
-                        <li><a href="https://www.instagram.com/goncaloo.almeidaaa/">Instagram</a></li>
-                    </ul>
-
-                </div> <!-- end intro content -->
-
-                <a href="#about" class="intro-scrolldown smoothscroll">
-                    <svg width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill-rule="evenodd" clip-rule="evenodd"><path d="M11 21.883l-6.235-7.527-.765.644 7.521 9 7.479-9-.764-.645-6.236 7.529v-21.884h-1v21.883z"/></svg>
-                </a>
-
-            </section> <!-- end s-intro -->
-
-
-            <!-- ### about
-            ================================================== -->
-            <section id="about" class="s-about target-section">
-
-
-                <div class="row about-info wide" data-animate-block>
-
-                    <div class="column lg-6 md-12 about-info__pic-block">
-                        <img src="images/aboutmefoto.jpg" class="aboutme-img" data-animate-el>
-                    </div>
-
-                    <div class="column lg-6 md-12">
-                        <div class="about-info__text" >
-
-                            <h2 class="text-pretitle with-line" data-animate-el>
-                                About
-                            </h2>
-                            <p class="attention-getter" data-animate-el>
-                                I’m a Computer Engineering student on a mission to understand how computers work and figuring out why the thing that worked yesterday suddenly doesn’t work today. It’s a thrilling (and slightly chaotic) journey through code, circuits, and the occasional stack overflow spiral. <br>
-                                <br>
-
-                                When I’m not deep in code, I like to balance things out by being as active as possible. I’ve always loved sports, and recently I’ve been playing a lot of tennis and padel, which has become a fun way to disconnect and recharge. Whether it’s on a court or out for a run, I enjoy anything that gets me moving and gives my brain a break from staring at screens. <br>
-                                <br>
-
-                                Right now, I’m focused on learning as much as I can, both technically and personally. I believe growth comes from staying curious, stepping outside my comfort zone, and being open to new experiences—whether that’s in the classroom, on the court, or anywhere in between.
-                            </p>
-                            <a href="Curriculo - Gonçalo Almeida.pdf" class="btn btn--medium u-fullwidth" data-animate-el>Download RESUMÉ</a>
-                        </div>
-                    </div>
-                </div> <!-- about-info -->
-
-                <div class="row about-timelines" data-animate-block>
-
-                    <div class="column lg-6 tab-12">
-
-                        <h2 class="text-pretitle" id="passions" data-animate-el>
-                            Passions
-                        </h2>
-
-                        <div class="timeline" data-animate-el>
-
-                            <div class="timeline__block">
-                                <div class="timeline__bullet"></div>
-                                <div class="timeline__header">
-                                    <h3 class="timeline__title">Technology</h3>
-                                </div>
-                                <div class="timeline__desc">
-                                    <p>Technology has always been a significant part of my life since I was a little. From playing with computers and building simple programs to exploring the latest gadgets and innovations, my passion for technology has only grown over the years.</p>
-                                </div>
-                            </div>
-
-                            <div class="timeline__block">
-                                <div class="timeline__bullet"></div>
-                                <div class="timeline__header">
-                                    <h3 class="timeline__title">Sports</h3>
-                                </div>
-                                <div class="timeline__desc">
-                                    <p>I’m passionate about staying active because it helps me maintain energy and focus throughout the day. I enjoy the teamwork, strategy, and friendly competition that sports bring. Exploring different sports keeps things exciting and constantly challenges me to improve both physically and mentally.</p>
-                                </div>
-                            </div>
-    
-                            <div class="timeline__block">
-                                <div class="timeline__bullet"></div>
-                                <div class="timeline__header">
-                                    <h4 class="timeline__title">Self-Development</h4>
-                                </div>
-                                <div class="timeline__desc">
-                                    <p>Self-development has always been a key focus in my life. I believe in continuously improving myself, both personally and professionally. Whether it’s through reading books, taking online courses, or setting new challenges, I strive to expand my knowledge and skills. This commitment to growth not only enhances my capabilities but also helps me adapt to new situations and embrace opportunities.</p>
-                                </div>
-                            </div>
-    
-                        </div> <!-- end timeline -->
-
-                    </div> <!-- end column -->
-
-                    <div class="column lg-6 tab-12">
-
-                        <h2 class="text-pretitle" id="education" data-animate-el>
-                            Education
-                        </h2>
-
-                        <div class="timeline" data-animate-el>
-
-                            <div class="timeline__block">
-                                <div class="timeline__bullet"></div>
-                                <div class="timeline__header">
-                                    <h3 class="timeline__title">Universidade Lusófona</h3>
-                                    <h5 class="timeline__meta">Computer Engeneering</h5>
-                                    <p class="timeline__timeframe">September 2024 - Present</p>
-                                </div>
-                                <div class="timeline__desc">
-                                    <p>Studying Computer Engineering at Universidade Lusófona has been a key part of my growth, both technically and personally. It’s where I’ve built a solid foundation, explored different areas of tech, and strengthened my passion for problem-solving and innovation.</p>
-                                </div>
-                            </div>
-    
-                            <div class="timeline__block">
-                                <div class="timeline__bullet"></div>
-                                <div class="timeline__header">
-                                    <h4 class="timeline__title">Escola Frei Gonçalo de Azevedo</h4>
-                                    <h5 class="timeline__meta">Science and Technology</h5>
-                                    <p class="timeline__timeframe">September 2017 - June 2024</p>
-                                </div>
-                                <div class="timeline__desc">
-                                    <p> My time in high school was a mix of challenges and growth. Between managing exams, projects, and the usual teenage drama, I learned a lot about responsibility and time management, sometimes the hard way. It was a place where I discovered new interests, made lasting friendships, and developed skills that prepared me for the next steps in life. Looking back, those years were an important foundation, even if they came with the occasional “I should have studied earlier” moment.</p>
-                                </div>
-                            </div>
-    
-                        </div> <!-- end timeline -->
-                        
-                    </div> <!-- end column -->
-
-
-                </div> <!-- end about-timelines -->
-
-            </section> <!-- end s-about -->
-
-            <!-- ### experience
-            ================================================== -->
-            <section id="experience" class="s-experience target-section">
-                <div class="row" data-animate-block>
-                    <div class="column lg-12">
-                        <h2 class="text-pretitle" data-animate-el>Experience</h2>
-                        <div class="timeline" data-animate-el>
-                            <!-- Exemplo de experiência -->
-                            <div class="timeline__block">
-                                <div class="timeline__block sem-bullet"></div>
-                                <div class="timeline__header">
-                                    <h3 class="timeline__title hover-link">Lefties</h3>
-                                    <p class="timeline__timeframe">2025</p>
-                                </div>
-                                <div class="timeline__desc">
-                                    <p>Lefties was my first professional experience, where I had the chance to grow within the company by taking on different roles across the store. This path allowed me to build a solid understanding of retail operations, while developing key skills in customer service, teamwork, leadership, and adaptability.</p>
-                                </div>
-                            </div>
-                            <div class="timeline__block">
-                                <div class="timeline__block sem-bullet"></div>
-                                <div class="timeline__header">
-                                    <h3 class="timeline__title hover-link">ZARA</h3>
-                                    <p class="timeline__timeframe">2025</p>
-                                </div>
-                                <div class="timeline__desc">
-                                    <p>At Zara, I worked in the warehouse, where I was responsible for preparing and organizing merchandise for store replenishment, ensuring an efficient stock flow. I also handled customer requests by locating and providing the requested items, and participated in inventory control tasks, ensuring accurate counting and organization of products. This experience allowed me to develop strong organizational skills, attention to detail, and operational efficiency.</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- ### works
-            ================================================== -->
-            <section id="works" class="s-works target-section">
-
-
-                <div class="row works-portfolio">
-
-                    <div class="column lg-12" data-animate-block>
-
-                        <h2 class="text-pretitle" data-animate-el>
-                            Projects
-                        </h2>
-                        <p data-animate-el>Here are some of my projects built through trial, error, and that one moment when everything finally clicks.</p>
-    
-                        <ul class="folio-list row block-lg-one-half block-stack-on-1000">
-
-                            <li class="folio-list__item column" data-animate-el>
-                                <a class="folio-list__item-link" href="#modal-01">
-                                    <div class="folio-list__item-pic">
-                                        <img src="images/portfolio/jogo balao.png"
-                                             srcset="images/portfolio/jogo balao.png 1x, images/portfolio/jogo balao-2x.png 2x" alt="">
-                                    </div>
-                                    
-                                    <div class="folio-list__item-text">
-                                        <div class="folio-list__item-title">
-                                            Baloon-in-line
-                                        </div>
-                                    </div>
-                                </a>
-                            </li> <!--end folio-list__item -->
-
-                            <li class="folio-list__item column" data-animate-el>
-                                <a class="folio-list__item-link" href="#modal-02">
-                                    <div class="folio-list__item-pic">
-                                        <img src="images/portfolio/radar%20barco.png"
-                                             srcset="images/portfolio/radar barco.png 1x, images/portfolio/radar barco @2.png 2x" alt="">
-                                    </div>
-                                    
-                                    <div class="folio-list__item-text">
-                                        <div class="folio-list__item-title">
-                                            Boat Radar
-                                        </div>
-                                    </div>
-                                </a>
-                            </li> <!--end folio-list__item -->
-                        </ul> <!-- end folio-list -->
-
-                    </div> <!-- end column -->
-
-
-                    <!-- Modal Templates Popup
-                    -------------------------------------------- -->
-                    <div id="modal-01" hidden>
-                        <div class="modal-popup">
-                            <div class="modal-popup__desc">
-                                <h5>Baloon-in-line</h5>
-                                <p>This project is a based game inspired by the classic Four-in-line, where two players compete to align four balloons in a row—horizontally, vertically, or diagonally. The game features a clear ASCII-style board and supports two-color pieces, making it easy to follow the progress. It's a fun and nostalgic implementation that brings simple gaming to the command line!</p>
-                            </div>
-
-                        </div>
-                    </div> <!-- end modal -->
-
-                    <div id="modal-02" hidden>
-                        <div class="modal-popup">
-                            <div class="modal-popup__desc">
-                                <h5>Boat Radar</h5>
-                                <p>This project is a based simulation that tracks the positions of boats on a grid. Users can view the initial and final positions of each boat, check individual boat coordinates, and list which boats have moved. This visual representation helps simulate a simple radar system, making it easier to monitor maritime traffic in a controlled environment.</p>
-                            </div>
-                        </div>
-                    </div> <!-- end modal -->
-                </div> <!-- end works-portfolio -->
-
-
-                <div class="row testimonials">
-                    <div class="column lg-12" data-animate-block>
-
-                        <div class="swiper-container testimonial-slider" data-animate-el>
-
-                            <!-- end swiper-wrapper -->
-
-                        </div> <!-- end swiper-container -->
-
-                    </div> <!-- end column -->
-                </div> <!-- end row testimonials -->
-
-            </section> <!-- end s-works -->
-
-
-            <section id="skills" class="s-skills target-section">
-                <div class="row" data-animate-block>
-                    <div class="column lg-6 md-12">
-                        <h2 class="text-pretitle" data-animate-el>Technical Skills</h2>
-                        <ul class="skills-list" data-animate-el>
-                            <li>Basic programming (Java, C, HTML,...)</li>
-                            <li>Problem-solving</li>
-                            <li>Logical thinking</li>
-                            <li>Attention to detail</li>
-
-                            <!-- Adiciona mais skills técnicas -->
-                        </ul>
-                    </div>
-                    <div class="column lg-6 md-12">
-                        <h2 class="text-pretitle" data-animate-el>Personal Skills</h2>
-                        <ul class="skills-list" data-animate-el>
-                            <li>Teamwork</li>
-                            <li>Responsibility</li>
-                            <li>Adaptability</li>
-                            <li>Quick learner</li>
-                            <!-- Adiciona mais skills pessoais -->
-                        </ul>
-                    </div>
-                </div>
-            </section>
-
-            <!-- ### contact
-            ================================================== -->
-            <section id="contact" class="s-contact target-section">
-
-                <div class="row contact-top">
-                    <div class="column lg-12">
-                        <h2 class="text-pretitle">
-                            Looking forward to hearing from you!
-                        </h2>
-                    </div>
-                </div> <!-- end contact-top -->
-
-                <div class="row contact-bottom">
-                    <div class="column lg-3 md-5 tab-6 stack-on-550 contact-block">
-                        <h3 class="text-pretitle">Social</h3>
-                        <ul class="contact-social">
-                            <li><a href="https://www.linkedin.com/in/gonçalo-almeida-049737350" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
-                            <li><a href="https://www.instagram.com/goncaloo.almeidaaa/">Instagram</a></li>
-                        </ul>
-                    </div>
-                    <div class="column lg-3 md-12 contact-block">
-                        <a href="mailto:goncalmeida06@gmail.com" class="mailtoui btn btn--medium u-fullwidth contact-btn">Email</a>
-                    </div>
-                </div> <!-- end contact-bottom -->
-
-            </section> <!-- end contact -->
-
-        </main> <!-- end s-content -->
-
-
-        <!-- ## footer
-        ================================================== -->
-        <footer class="s-footer">
-
-            <div class="row">
-                <div class="column ss-copyright">
-                    <span>© Copyright Luther 2021</span> 
-                    <span>Design by <a href="https://www.styleshout.com/">StyleShout</a></span>
-                </div>
-
-                <div class="ss-go-top">
-                    <a class="smoothscroll" title="Back to Top" href="#top">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill-rule="evenodd" clip-rule="evenodd"><path d="M11 2.206l-6.235 7.528-.765-.645 7.521-9 7.479 9-.764.646-6.236-7.53v21.884h-1v-21.883z"/></svg>
-                    </a>
-                </div>
-            </div>
-
-        </footer> <!-- end s-footer -->
-
-    </div> <!-- end -s-pagewrap -->
-
-
-    <!-- Java Script
-    ================================================== -->
-    <script src="js/plugins.js"></script>
-    <script src="js/main.js"></script>
-
+</footer>
+
+<!-- editor-style status bar -->
+<div class="statusbar" aria-hidden="true">
+    <span class="statusbar__branch">main</span>
+    <span id="sb-section">intro</span>
+    <span class="statusbar__push" id="sb-pos">Ln 1, 0%</span>
+    <span class="statusbar__opt">UTF-8</span>
+    <span class="statusbar__opt" id="sb-time"></span>
+</div>
+
+<dialog class="lightbox" id="lightbox" aria-label="Photo">
+    <img alt="">
+    <p></p>
+    <button class="btn" type="button">Close</button>
+</dialog>
+
+<script src="js/projects.js"></script>
+<script src="js/site.js"></script>
 </body>
 </html>
