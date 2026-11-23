@@ -2,187 +2,176 @@
  * the filters, the counts and the skills list all update by themselves.
  *
  *   context : 'university' or 'personal'
+ *   team    : true when it was built with classmates
  *   image   : path to a screenshot, OR
- *   code    : a few real lines from the repo, shown as the cover
- *   repo / live : links (optional)
+ *   code    : a few lines shown as the cover, with their title in file
+ *   repo / live : links (optional, only for public code and sites)
  */
 window.PROJECTS = [
     {
-        title: 'Academic portfolio in Django',
+        title: 'Store in microservices',
         context: 'university',
         year: 2026,
-        tech: ['Python', 'Django', 'PostgreSQL', 'HTML', 'CSS'],
-        summary: 'A full web app with login by password or one-time email link, articles with likes and comments, and pages for courses, final projects and technologies. The database runs on Neon and the media files on Cloudinary.',
-        file: 'accounts/models.py',
+        tech: ['Java', 'Spring Boot', 'Kafka', 'gRPC', 'PostgreSQL', 'SQL', 'Docker', 'REST API', 'JUnit', 'Maven'],
+        summary: 'A store split into order, product and supplier services, each with its own database. Services talk over REST, Kafka events and gRPC, with retries, a dead letter topic and idempotent consumers, and integration tests on Testcontainers.',
+        file: 'architecture',
         code: [
-            'class MagicLink(models.Model):',
-            '    user = models.ForeignKey(User, ...)',
-            '    token = models.UUIDField(default=uuid.uuid4)',
-            '    usado = models.BooleanField(default=False)',
-            '',
-            '    def is_valid(self):',
-            '        # Link válido por 15 minutos'
+            'order-service',
+            '└─ Kafka  OrderConfirmed',
+            '   └─> product-service',
+            'supplier-service',
+            '├─ Kafka  SupplierDeactivated',
+            '├─ gRPC   CountProductsBySupplier',
+            '└─> product-service'
         ]
     },
     {
-        title: 'Databases coursework',
+        title: 'DEISI Island',
         context: 'university',
+        team: true,
         year: 2026,
-        tech: ['SQL', 'SQL Server'],
-        summary: 'Weekly T-SQL exercises on the BikeStores and HR databases: joins, grouping, nested queries and data definition.',
-        file: 'a22408651_AP08.sql',
+        tech: ['Java', 'Maven'],
+        summary: 'A turn-based simulation of rabbits and foxes living on an island. Each species moves, eats and spends energy by its own rules, modelled with inheritance and validated input. Still in development.',
+        file: 'classes',
         code: [
-            'SELECT s.staff_id, st.store_name,',
-            '       m.first_name AS manager_name',
-            'FROM sales.staffs s',
-            'INNER JOIN sales.stores st',
-            '        ON st.store_id = s.store_id',
-            'LEFT JOIN sales.staffs m',
-            '       ON m.staff_id = s.manager_id'
-        ],
-        repo: 'https://github.com/a22408651GoncaloAlmeida/dbClasses'
+            'GameManager',
+            '└─ Island',
+            '   ├─ Terrain',
+            '   └─ Animal',
+            '      ├─ Rabbit',
+            '      └─ Fox'
+        ]
     },
     {
-        title: 'Music festival manager',
+        title: 'Academic portfolio with a tennis API',
         context: 'university',
         year: 2026,
-        tech: ['Python', 'Django', 'SQLite', 'HTML', 'CSS'],
-        summary: 'A Django app I extended to manage a festival: create, edit and delete concerts, list stages and days, and stop two concerts sharing the same stage and time.',
-        file: 'festival/models.py',
+        tech: ['Python', 'Django', 'REST API', 'PostgreSQL', 'Docker', 'GitHub Actions', 'HTML', 'CSS'],
+        summary: 'A Django site with login by password or one-time email link, articles with likes and comments, and a Django Ninja API for tennis players, tournaments and matches protected by API keys. A pipeline builds the Docker image and deploys it.',
+        file: 'api/api.py',
         code: [
-            'class Concerto(models.Model):',
-            '    banda = models.ForeignKey(Banda, ...)',
-            '    palco = models.ForeignKey(Palco, ...)',
+            "@api.get('/jogadores/', tags=['Jogadores'])",
+            '@paginate(PageNumberPagination, page_size=10)',
+            'def listar_jogadores(request, nome=None):',
+            '    qs = Jogador.objects.all()',
+            '    if nome:',
+            '        qs = qs.filter(nome__icontains=nome)',
+            '    return qs'
+        ]
+    },
+    {
+        title: 'Susana Cardoso',
+        context: 'personal',
+        year: 2026,
+        tech: ['TypeScript', 'React', 'TanStack', 'Tailwind CSS', 'Vercel Blob'],
+        summary: 'The site of a pyrography artist, in Portuguese and English, with a gallery, a commissions page and a private panel where she manages the catalogue. Started in Lovable, then rebuilt: new design, storage moved to Vercel Blob and a new admin panel.',
+        image: 'images/portfolio/susana-cardoso.jpg',
+        live: 'https://susanacardoso.vercel.app'
+    },
+    {
+        title: 'DEISI World Meter',
+        context: 'university',
+        team: true,
+        year: 2026,
+        tech: ['Java', 'JUnit'],
+        summary: 'A command-line program that loads cities, countries and population data from CSV files and answers queries over them. Hash-map indexes keep lookups by country and year in constant time.',
+        file: 'commands',
+        code: [
+            'GET_CITIES_BY_COUNTRY',
+            'GET_TOP_POPULATION_INCREASE',
+            'GET_COUNTRIES_GENDER_GAP',
+            'GET_CITIES_AT_DISTANCE',
+            'GET_COUNTRIES_ABOVE_AVERAGE',
+            'INSERT_CITY',
+            'REMOVE_COUNTRY'
+        ]
+    },
+    {
+        title: 'The Great Programming Journey',
+        context: 'university',
+        team: true,
+        year: 2026,
+        tech: ['Java', 'JUnit', 'UML'],
+        summary: 'A board game engine about the life of a programmer. Players fall into abysses such as a crash or an infinite loop and use tools to escape. Every abyss and tool is its own class, with no instanceof.',
+        file: 'AbyssLLM.java',
+        code: [
+            'public class AbyssLLM extends AbyssBase {',
             '',
-            '    class Meta:',
-            '        unique_together = (("dia", "palco", "hora"),)',
-            '        ordering = ["dia__data", "hora"]'
+            '    public AbyssLLM(int position) {',
+            '        super(20, position);',
+            '    }',
+            '',
+            '    @Override'
         ],
-        repo: 'https://github.com/a22408651GoncaloAlmeida/festival-form-a22408651'
+        repo: 'https://github.com/miguel-baptista07/TheGreatProgrammingJourney'
     },
     {
-        title: 'DEISI Shop in React',
+        title: 'Operating system simulator',
+        context: 'university',
+        team: true,
+        year: 2025,
+        tech: ['C', 'POSIX threads', 'CMake'],
+        summary: 'A simulator with round-robin scheduling on several CPU threads and virtual memory with paging and swap. Pages are replaced by FIFO, random, clock or LRU. Extends a base supplied by the course.',
+        file: 'threads',
+        code: [
+            'ossim --cpus N --algo LRU',
+            '├─ command_worker',
+            '├─ blocked_worker',
+            '├─ clock_worker',
+            '└─ cpu_worker × N',
+            '   ├─ scheduler',
+            '   └─ virtual memory'
+        ]
+    },
+    {
+        title: 'Sneaker collection manager',
+        context: 'university',
+        team: true,
+        year: 2025,
+        tech: ['Java', 'Swing'],
+        summary: 'A desktop app to organise sneakers by decade, with search, sorting and saved collections. An analysis service writes prompts about each pair for a language model, and runs on a mock model by default.',
+        file: 'ColecaoInterface.java',
+        code: [
+            'public ColecaoInterface() {',
+            '    setContentPane(criarRoot());',
+            '',
+            '    service.carregarTodas();',
+            '    atualizarComboColecoes();',
+            '    carregarTabela();',
+            '}'
+        ],
+        repo: 'https://github.com/miguel-baptista07/Grupo6_MiguelGoncalo_Colecao'
+    },
+    {
+        title: 'DEISI Shop',
         context: 'university',
         year: 2025,
-        tech: ['TypeScript', 'React', 'Next.js', 'Tailwind CSS', 'REST API'],
-        summary: 'A Next.js app with dynamic routes, product pages loaded from an API with SWR, favourites saved in the browser and a searchable list of countries.',
+        tech: ['TypeScript', 'React', 'Next.js', 'Tailwind CSS', 'JavaScript', 'REST API'],
+        summary: 'An online shop built twice: first in plain JavaScript, with search, sorting, a basket and checkout, then in Next.js with dynamic routes, data loaded with SWR and favourites saved in the browser.',
         file: 'components/ProdutoCard.tsx',
         code: [
-            'function ProdutoCard({ product }: Props) {',
-            '  const [isFavorite, setIsFavorite] = useState(false);',
+            'function toggleFavorite() {',
+            '  let favorites = JSON.parse(',
+            '    localStorage.getItem("favorites") || "[]"',
+            '  );',
             '',
-            '  function toggleFavorite() {',
-            '    let favorites = JSON.parse(',
-            '      localStorage.getItem("favorites") || "[]"',
-            '    );'
+            '  if (favorites.includes(product.id)) {'
         ],
         repo: 'https://github.com/a22408651GoncaloAlmeida/appnext'
-    },
-    {
-        title: 'React technology explorer',
-        context: 'university',
-        year: 2025,
-        tech: ['TypeScript', 'React', 'Next.js', 'Tailwind CSS'],
-        summary: 'My first Next.js app: rated cards for the web technologies I was learning, built from a JSON file.',
-        image: 'images/portfolio/next-tech-explorer.jpg',
-        repo: 'https://github.com/a22408651GoncaloAlmeida/next',
-        live: 'https://next2-nine-sand.vercel.app'
-    },
-    {
-        title: 'ESP32 pattern receiver',
-        context: 'university',
-        year: 2025,
-        tech: ['JavaScript', 'Node.js', 'Express', 'ESP32', 'REST API'],
-        summary: 'A small server that receives patterns sent by an ESP32 board over HTTP and shows the latest one on a live page.',
-        file: 'server.js',
-        code: [
-            '// Endpoint para receber os dados do ESP32',
-            'app.post("/receive", (req, res) => {',
-            '    ultimoPadrao = req.body.pattern;',
-            '    console.log("Recebido:", ultimoPadrao);',
-            '    res.send("OK");',
-            '});'
-        ],
-        repo: 'https://github.com/a22408651GoncaloAlmeida/projetoAAC'
-    },
-    {
-        title: 'DEISI Shop in JavaScript',
-        context: 'university',
-        year: 2025,
-        tech: ['JavaScript', 'HTML', 'CSS', 'REST API'],
-        summary: 'An online shop in plain JavaScript: products from an API, category filter, price sorting, search, and a basket with discounts and checkout.',
-        file: 'Lab7/scripts/main.js',
-        code: [
-            'if (pesquisa) {',
-            '  lista = lista.filter(p =>',
-            '    p.title.toLowerCase().includes(pesquisa)',
-            '  );',
-            '}',
-            '',
-            '// ordenação por preço'
-        ],
-        repo: 'https://github.com/a22408651GoncaloAlmeida/a22408651GoncaloAlmeida.github.io/tree/main/Lab7'
-    },
-    {
-        title: 'Web labs',
-        context: 'university',
-        year: 2025,
-        tech: ['HTML', 'CSS', 'JavaScript'],
-        summary: 'Weekly exercises that go from a first HTML page to layouts, events, counters and data kept in the browser.',
-        file: 'Lab5/scripts/main.js',
-        code: [
-            'let contador = Number(',
-            "  localStorage.getItem('lab5_counter')",
-            ') || 0;',
-            '',
-            'const handlePassaOver = () => {',
-            "  passaLabel.textContent = '1. Obrigado por passares';",
-            '};'
-        ],
-        repo: 'https://github.com/a22408651GoncaloAlmeida/a22408651GoncaloAlmeida.github.io',
-        live: 'https://a22408651goncaloalmeida.github.io'
-    },
-    {
-        title: 'Era uma vez uma Pedra',
-        context: 'personal',
-        year: 2025,
-        tech: ['HTML', 'CSS', 'JavaScript'],
-        summary: 'An online gallery for an artist in my family, with paintings, painted stones and pyrography sorted by category. Built as a Christmas present.',
-        image: 'images/portfolio/era-uma-vez-uma-pedra.jpg',
-        repo: 'https://github.com/a22408651GoncaloAlmeida/eraumavezumapedra',
-        live: 'https://eraumavezumapedra.vercel.app'
     },
     {
         title: 'This website',
         context: 'personal',
         year: 2026,
         tech: ['HTML', 'CSS', 'JavaScript'],
-        summary: 'My résumé as a site, with no framework. The project filter, the hex dump and the shell below are plain JavaScript.',
+        summary: 'My résumé as a site, with no framework. The project filter and the shell on the first screen are plain JavaScript.',
         file: 'js/site.js',
         code: [
-            'const own = enc.encode(ch);',
-            'own.forEach((b, i) => bytes.push({',
-            '    b, ch, ci,',
-            '    first: i === 0,',
-            '    size: own.length',
-            '}));'
+            'function flip(t) {',
+            '    if (state.tech.has(t)) state.tech.delete(t);',
+            '    else state.tech.add(t);',
+            '}'
         ],
         repo: 'https://github.com/a22408651GoncaloAlmeida/goncaloalmeida'
-    },
-    {
-        title: 'Balloon-in-line',
-        context: 'university',
-        year: 2025,
-        tech: ['Kotlin'],
-        summary: 'A command-line game in the style of four-in-a-row. Two players drop coloured balloons on an ASCII board and try to line up four.',
-        image: 'images/portfolio/jogo balao.png'
-    },
-    {
-        title: 'Boat radar',
-        context: 'university',
-        year: 2025,
-        tech: ['C'],
-        summary: 'A command-line radar that draws boats on a grid before and after they move, looks up coordinates and lists the boats that changed place.',
-        image: 'images/portfolio/radar barco.png'
     }
 ];

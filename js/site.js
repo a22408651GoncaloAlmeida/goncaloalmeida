@@ -68,82 +68,6 @@
     setInterval(tick, 15000);
 
 
-    /* Hex dump of the intro text (real UTF-8 bytes)
-     * ------------------------------------------------------ */
-    (function hexdump() {
-        const panel = $('.hexdump');
-        const body = $('.hexdump__body');
-        const foot = $('.hexdump__foot');
-        const hint = foot.textContent;
-        const enc = new TextEncoder();
-
-        // one entry per byte, remembering which character it belongs to
-        const bytes = [];
-        Array.from(panel.dataset.text).forEach((ch, ci) => {
-            const own = enc.encode(ch);
-            own.forEach((b, i) => bytes.push({ b, ch, ci, first: i === 0, size: own.length }));
-        });
-
-        const WIDTH = 8;
-        const hexes = [], chars = [];
-        for (let i = 0; i < bytes.length; i += WIDTH) {
-            const hex = el('span', { class: 'hexrow__hex' });
-            const txt = el('span', { class: 'hexrow__txt' });
-            for (let j = i; j < i + WIDTH; j++) {
-                const b = bytes[j];
-                const h = el('span', { class: 'byte' }, b ? b.b.toString(16).padStart(2, '0') : '  ');
-                // a continuation byte has no character of its own
-                const c = el('span', { class: 'chr' }, b ? (b.first ? b.ch : '·') : ' ');
-                if (b) {
-                    h.dataset.i = c.dataset.i = j;
-                    hexes.push(h);
-                    chars.push(c);
-                }
-                hex.append(h);
-                txt.append(c);
-            }
-            body.append(el('div', { class: 'hexrow' },
-                el('span', { class: 'hexrow__addr' }, i.toString(16).padStart(8, '0')), hex, txt));
-        }
-
-        let marked = [];
-        function clear() {
-            marked.forEach(n => n.classList.remove('on'));
-            marked = [];
-            foot.textContent = hint;
-        }
-        function show(e) {
-            const t = e.target.closest('[data-i]');
-            if (!t) return;
-            clear();
-            const b = bytes[+t.dataset.i];
-            bytes.forEach((o, i) => { if (o.ci === b.ci) marked.push(hexes[i], chars[i]); });
-            marked.forEach(n => n.classList.add('on'));
-            const hex = Array.from(enc.encode(b.ch)).map(x => '0x' + x.toString(16).padStart(2, '0')).join(' ');
-            foot.textContent = hex + ' is ' + (b.ch === ' ' ? 'a space' : '"' + b.ch + '"') +
-                (b.size > 1 ? ', ' + b.size + ' bytes in UTF-8' : '');
-        }
-        body.addEventListener('pointerover', show);
-        body.addEventListener('pointerdown', show);
-        body.addEventListener('pointerleave', e => { if (e.pointerType === 'mouse') clear(); });
-
-        // load into memory, byte by byte, once
-        if (reduced) return;
-        hexes.concat(chars).forEach(n => n.classList.add('off'));
-        const start = performance.now(), length = 1100;
-        let done = 0;
-        function step(now) {
-            const upto = Math.min(hexes.length, Math.ceil(Math.max(0, now - start) / length * hexes.length));
-            for (; done < upto; done++) {
-                hexes[done].classList.remove('off');
-                chars[done].classList.remove('off');
-            }
-            if (done < hexes.length) requestAnimationFrame(step);
-        }
-        requestAnimationFrame(step);
-    })();
-
-
     /* Photo lightbox
      * ------------------------------------------------------ */
     const lightbox = $('#lightbox');
@@ -183,12 +107,12 @@
     }
 
     // tiny highlighter for the covers: comments and keywords
-    const KEYWORDS = /^(class|def|return|if|let|const|for|function|export|select|from|inner|left|join|on|as)$/i;
+    const KEYWORDS = /^(class|def|return|if|let|const|for|function|export|select|from|inner|left|join|on|as|public|extends|super)$/i;
     function highlight(line) {
         const out = el('span', { class: 'l' });
-        (line.match(/#.*$|\/\/.*$|"[^"]*"|'[^']*'|\w+|\s+|[^\w\s]/g) || [' ']).forEach(t => {
+        (line.match(/#.*$|\/\/.*$|@\w+|"[^"]*"|'[^']*'|\w+|\s+|[^\w\s]/g) || [' ']).forEach(t => {
             if (/^(#|\/\/)/.test(t)) out.append(el('span', { class: 'com' }, t));
-            else if (KEYWORDS.test(t)) out.append(el('span', { class: 'kw' }, t));
+            else if (KEYWORDS.test(t) || t[0] === '@') out.append(el('span', { class: 'kw' }, t));
             else out.append(t);
         });
         return out;
@@ -220,7 +144,7 @@
             el('div', { class: 'card__body' },
                 el('div', {},
                     el('h3', {}, p.title),
-                    el('span', { class: 'card__meta' }, (p.context === 'university' ? 'University' : 'Personal') + ', ' + p.year)),
+                    el('span', { class: 'card__meta' }, (p.context === 'university' ? 'University' : 'Personal') + ', ' + p.year + (p.team ? ', team project' : ''))),
                 el('p', {}, p.summary),
                 tech,
                 links.children.length ? links : null));
@@ -326,9 +250,10 @@
     /* Skills, counted from the projects
      * ------------------------------------------------------ */
     const GROUPS = {
-        languages: ['Python', 'JavaScript', 'TypeScript', 'SQL', 'C', 'Kotlin', 'HTML', 'CSS'],
-        frameworks: ['Django', 'React', 'Next.js', 'Node.js', 'Express', 'Tailwind CSS'],
-        databases: ['PostgreSQL', 'SQL Server', 'SQLite']
+        languages: ['Java', 'Python', 'C', 'JavaScript', 'TypeScript', 'SQL', 'HTML', 'CSS'],
+        frameworks: ['Spring Boot', 'Django', 'React', 'Next.js', 'TanStack', 'Tailwind CSS', 'Swing', 'JUnit'],
+        'data and messaging': ['PostgreSQL', 'Kafka', 'gRPC', 'REST API', 'Vercel Blob'],
+        tools: ['Docker', 'Maven', 'GitHub Actions', 'CMake', 'UML', 'POSIX threads']
     };
     const known = Object.values(GROUPS).flat();
     GROUPS.other = allTech.filter(t => !known.includes(t));
@@ -369,16 +294,29 @@
 
         const HELP = [
             ['whoami', 'who you are talking to'],
-            ['deloitte', 'the internship and what came after'],
+            ['deloitte', 'internship and ambassador role'],
             ['projects', 'list every project'],
-            ['projects python', 'list projects using a technology'],
+            ['projects java', 'list projects by technology'],
             ['cv', 'my résumé'],
-            ['email, github, linkedin', 'ways to reach me'],
+            ['email', 'write to me'],
+            ['github', 'my code'],
+            ['linkedin', 'my profile'],
             ['clear', 'empty this window']
         ];
+        // a command you can also click or tap
+        function cmd(name) {
+            const b = el('button', { type: 'button', class: 'cmd' }, name);
+            b.addEventListener('click', () => run(name));
+            return b;
+        }
 
         const commands = {
-            help() { HELP.forEach(([c, d]) => print(bold(c.padEnd(25)), d)); },
+            help() {
+                HELP.forEach(([c, d]) => {
+                    print(cmd(c), el('span', {}, d));
+                    out.lastChild.className = 'shell__help';
+                });
+            },
             whoami() { print('Gonçalo Almeida. Computer Engineering student at Lusófona, Deloitte ambassador, regular at the tennis and padel courts.'); },
             deloitte() {
                 print('Summer intern in 2026, Team-Players award with Infini9, ambassador today.');
@@ -398,7 +336,7 @@
                 state.tech.add(t);
                 render();
                 projects.filter(p => p.tech.includes(t)).forEach(p => print(bold(String(p.year)), '  ' + p.title));
-                print('The project list is now filtered by ' + t + '.');
+                print('The ', link('#projects', 'project list'), ' is now filtered by ' + t + '.');
             },
             cv() { print(link('Curriculo%20-%20Gon%C3%A7alo%20Almeida.pdf', 'Download résumé (PDF)')); },
             email() { print(link('mailto:goncalmeida06@gmail.com', 'goncalmeida06@gmail.com')); },
@@ -414,27 +352,50 @@
             clear() { out.replaceChildren(); }
         };
 
-        $('#shell-form').addEventListener('submit', e => {
-            e.preventDefault();
-            const line = input.value.trim();
-            input.value = '';
-            if (!line) return;
+        function run(line) {
             history.push(line);
             at = history.length;
             print(bold('visitor@goncalo:~$ '), line);
             const [name, ...rest] = line.split(/\s+/);
             const key = name.toLowerCase();
             if (Object.prototype.hasOwnProperty.call(commands, key)) commands[key](rest.join(' '));
-            else print(name + ': command not found. Type help to see what works.');
+            else print(name + ': command not found. Type ', cmd('help'), ' to see what works.');
+        }
+        $('#shell-form').addEventListener('submit', e => {
+            e.preventDefault();
+            const line = input.value.trim();
+            input.value = '';
+            if (!line) return;
+            finishIntro();
+            run(line);
         });
         input.addEventListener('keydown', e => {
             if (e.key === 'ArrowUp' && at > 0) { input.value = history[--at]; e.preventDefault(); }
             if (e.key === 'ArrowDown' && at < history.length) { input.value = history[++at] || ''; e.preventDefault(); }
         });
         $('#shell').addEventListener('click', e => {
-            if (!e.target.closest('a') && !String(window.getSelection())) input.focus({ preventScroll: true });
+            if (!e.target.closest('a, button') && !String(window.getSelection())) input.focus({ preventScroll: true });
         });
-        print('Type ', bold('help'), ' and press Enter, or just send an email.');
+        // on load the shell types its first command, once
+        const typed = document.createTextNode('');
+        const word = 'whoami';
+        let introDone = false;
+        function finishIntro() {
+            if (introDone) return;
+            introDone = true;
+            typed.data = word;
+            commands.whoami();
+            print('Type ', cmd('help'), ' for every command, or try ', cmd('deloitte'), ' or ', cmd('projects'));
+            out.setAttribute('aria-live', 'polite');
+        }
+        function type() {
+            if (introDone) return;
+            if (typed.data.length === word.length) { finishIntro(); return; }
+            typed.data += word[typed.data.length];
+            setTimeout(type, 90);
+        }
+        print(bold('visitor@goncalo:~$ '), typed);
+        if (reduced) finishIntro(); else setTimeout(type, 500);
     })();
 
     render();

@@ -53,12 +53,13 @@
                 </p>
             </div>
 
-            <!-- filled by js/site.js: the real UTF-8 bytes of the text in data-text -->
-            <figure class="hexdump" data-text="Gonçalo Almeida. Computer Engineering, Universidade Lusófona. Deloitte summer intern 2026, now ambassador. Python, SQL, TypeScript, C.">
-                <div class="hexdump__head"><span>$ hexdump -C goncalo.txt</span></div>
-                <div class="hexdump__body" aria-hidden="true"></div>
-                <figcaption class="hexdump__foot">Point at any byte to read it</figcaption>
-            </figure>
+            <div class="shell" id="shell">
+                <div class="shell__out" id="shell-out" role="log" aria-live="off" tabindex="0" aria-label="Shell output"></div>
+                <form class="shell__line" id="shell-form">
+                    <label for="shell-in">visitor@goncalo:~$</label>
+                    <input id="shell-in" type="text" autocomplete="off" autocapitalize="off" spellcheck="false" enterkeyhint="go" placeholder="type help">
+                </form>
+            </div>
         </div>
     </section>
 
@@ -192,7 +193,7 @@
                     </div>
                     <div class="filter">
                         <label class="filter__label" for="search">Search</label>
-                        <input id="search" type="search" placeholder="shop, radar, API" autocomplete="off">
+                        <input id="search" type="search" placeholder="shop, simulator, API" autocomplete="off">
                     </div>
                     <div class="filter" id="match-row" role="group" aria-label="How to combine technologies" hidden>
                         <span class="filter__label">Match</span>
@@ -248,20 +249,12 @@
             <div>
                 <h2>Looking forward to hearing from you</h2>
                 <p><a class="btn" href="mailto:goncalmeida06@gmail.com">Send me an email</a></p>
-                <ul class="plainlist">
-                    <li><a class="textlink" href="https://github.com/a22408651GoncaloAlmeida" target="_blank" rel="noopener">GitHub</a></li>
-                    <li><a class="textlink" href="https://www.linkedin.com/in/gonçalo-almeida-049737350" target="_blank" rel="noopener">LinkedIn</a></li>
-                    <li><a class="textlink" href="https://www.instagram.com/goncaloo.almeidaaa/" target="_blank" rel="noopener">Instagram</a></li>
-                </ul>
             </div>
-
-            <div class="shell" id="shell">
-                <div class="shell__out" id="shell-out" role="log" aria-live="polite" tabindex="0" aria-label="Shell output"></div>
-                <form class="shell__line" id="shell-form">
-                    <label for="shell-in">visitor@goncalo:~$</label>
-                    <input id="shell-in" type="text" autocomplete="off" autocapitalize="off" spellcheck="false" enterkeyhint="go" placeholder="type help">
-                </form>
-            </div>
+            <ul class="plainlist contact__links">
+                <li><a class="textlink" href="https://github.com/a22408651GoncaloAlmeida" target="_blank" rel="noopener">GitHub</a></li>
+                <li><a class="textlink" href="https://www.linkedin.com/in/gonçalo-almeida-049737350" target="_blank" rel="noopener">LinkedIn</a></li>
+                <li><a class="textlink" href="https://www.instagram.com/goncaloo.almeidaaa/" target="_blank" rel="noopener">Instagram</a></li>
+            </ul>
         </div>
     </section>
 
